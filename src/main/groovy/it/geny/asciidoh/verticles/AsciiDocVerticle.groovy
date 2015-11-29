@@ -79,6 +79,7 @@ class AsciiDocVerticle extends GroovyVerticle {
         command.waitForOrKill(5000L)
         if (command.exitValue()) {
             log.error(command.err.text)
+            response.putHeader("content-type", "text/html").end("ERROR -> ${command.err.text}")
         } else {
             def file = new File("/home/luigi/tmp/output_${name}.html")
             def text = file.text
